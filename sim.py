@@ -17,17 +17,10 @@ class Simulation(object):
         self._suspectible = set(range(population_size))
         self._unknown_infected = dict()  # ID -> Days infected
         self._known_infected = dict()    # ID -> Days infected
-        self._suspectible_to_infected(k=initial_outbreak_size)
+        self._move_rand_s_to_u(k=initial_outbreak_size)
 
         self._recovered = set()
         self._deaths = set()
-
-    def _suspectible_to_infected(self, k):
-        """Randomly moves k people from suspectible to unknown infected"""
-        rand_elems = random.sample(self._suspectible, k)
-        for elem in rand_elems:
-            self._unknown_infected[elem] = 0
-            self._suspectible.remove(elem)
 
     @staticmethod
     def _rand_split_set(source_set, dest_set, k):
@@ -60,6 +53,19 @@ class Simulation(object):
     @property
     def num_deaths(self):
         return len(self._deaths)
+
+    def _move_rand_s_to_u(self, k):
+        """Randomly moves k people from suspectible to unknown infected"""
+        rand_elems = random.sample(self._suspectible, k)
+        for elem in rand_elems:
+            self._unknown_infected[elem] = 0
+            self._suspectible.remove(elem)
+
+    def _suspectible_to_unknown(self, distance_likelihood):
+        # TODO I don't believe r0 is the right number here, but temporarily
+        # Really should use beta for up to gamma days
+        num_will_get_infected = self._r0 * self.num_unknown_infected * ((1 - distance_likelihood) * self.num_suspectible) / self._population_size
+        self._move_rand_s_to_u(k=num_will_get_infected)
 
     def _unknown_to_known_infected(self):
         # TODO
@@ -96,10 +102,7 @@ class Simulation(object):
         known hopefully self-isolate (of course, this doesn't account for
         hospitals, households, etc).
         """
-        # TODO I don't believe r0 is the right number here, but temporarily
-        # Really should use beta for up to gamma days
-        num_will_get_infected = self._r0 * self.num_unknown_infected * ((1 - distance_likelihood) * self.num_suspectible) / self._population_size
-        self._suspectible_to_infected(k=num_will_get_infected)
+        self._suspectible_to_unknown(distance_likelihood)
 
         self._unknown_to_known_infected()
         self._unknown_to_recovered()
