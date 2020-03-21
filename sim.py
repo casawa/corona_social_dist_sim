@@ -1,6 +1,9 @@
 """A simple simulation to interactively show the importance of early social distancing."""
+
+import random
+
 class Simulation(object):
-    def __init__(self, population_size, r0):
+    def __init__(self, population_size, r0, initial_outbreak_size):
         self._r0 = r0
 
         # TODO better models? (e.g. consider time better)
@@ -11,8 +14,18 @@ class Simulation(object):
 
         self._suspectible = set(range(population_size))
         self._infected = set()
+        Simulation._random_split_set(self._suspectible, self._infected, k=initial_outbreak_size)
+
         self._recovered = set()
         self._deaths = set()
+
+    @staticmethod
+    def _random_split_set(source_set, dest_set, k):
+        """Randomly moves k elements from the source_set to dest_set"""
+        rand_elems = random.sample(source_set, k)
+        for elem in rand_elems:
+            dest_set.add(elem)
+            source_set.remove(elem)
 
     @property
     def num_infected(self):
@@ -36,8 +49,9 @@ def main():
     population_size = 10 * 1000
     r0 = 2
     num_days = 3
+    initial_outbreak_size = 3
 
-    sim = Simulation(population_size, r0)
+    sim = Simulation(population_size, r0, initial_outbreak_size)
 
     # Run simulation over days
     for i in range(num_days):
