@@ -4,6 +4,12 @@ class Simulation(object):
         self._population_size = population_size
         self._r0 = r0
 
+        # TODO better models? (e.g. consider time better)
+        # TODO consider exposing these params in the API?
+        self._i_to_r = 0.25  # Idea being 1 - (1 - 0.25)^14 is approx 0.98
+        self._i_to_d = 0.003  # Idea being 1 - (1 - 0.003)^7 is approx 0.02
+        self._i_to_i = 1 - self._i_to_r - self._i_to_d
+
         self._num_infected = 0
         self._num_recovered = 0
         self._num_deaths = 0
