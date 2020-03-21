@@ -45,6 +45,14 @@ class Simulation(object):
         return len(self._unknown_infected) + len(self._known_infected)
 
     @property
+    def num_known_infected(self):
+        return len(self._known_infected)
+
+    @property
+    def num_unknown_infected(self):
+        return len(self._unknown_infected)
+
+    @property
     def num_recovered(self):
         return len(self._recovered)
 
@@ -54,7 +62,9 @@ class Simulation(object):
 
     def step_day(self, distance_likelihood):
         # TODO I don't believe r0 is the right number here, but temporarily
-        num_will_get_infected = self._r0 * self.num_infected * ((1 - distance_likelihood) * self.num_suspectible) / self._population_size
+        # Really should use beta for up to gamma days
+        # ASSUMPTION only unknown cases will infect (of course, this doesn't account for hospitals, households, etc)
+        num_will_get_infected = self._r0 * self.num_unknown_infected * ((1 - distance_likelihood) * self.num_suspectible) / self._population_size
         self._suspectible_to_infected(k=num_will_get_infected)
 
         # ASSUMPTION: recovered don't get it again
