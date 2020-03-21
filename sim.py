@@ -3,6 +3,7 @@
 import random
 
 class Simulation(object):
+    """See step_day() for the model."""
     def __init__(self, population_size, r0, initial_outbreak_size):
         self._population_size = population_size
         self._r0 = r0
@@ -81,19 +82,29 @@ class Simulation(object):
         pass
 
     def step_day(self, distance_likelihood):
+        """Simulates one day.
+
+        The transition model is as follows:
+          S --> U --> K --> D
+                |     |
+                v     v
+                R     R
+        - Assumes takes at least one day to go between states.
+        - Assumes recovered can't get it again.
+        - Assumes only known cases are severe enough to lead to death.
+        - Assumes only unknown cases can infect because cases that are
+        known hopefully self-isolate (of course, this doesn't account for
+        hospitals, households, etc).
+        """
         # TODO I don't believe r0 is the right number here, but temporarily
         # Really should use beta for up to gamma days
-        # ASSUMPTION only unknown cases will infect (of course, this doesn't account for hospitals, households, etc)
         num_will_get_infected = self._r0 * self.num_unknown_infected * ((1 - distance_likelihood) * self.num_suspectible) / self._population_size
         self._suspectible_to_infected(k=num_will_get_infected)
 
         self._unknown_to_known_infected()
         self._unknown_to_recovered()
-        # ASSUMPTION only known cases are severe enough to lead to death
         self._known_to_death()
         self._known_to_recovered()
-
-        # ASSUMPTION: recovered don't get it again
 
         self._update_day_counts()
 
