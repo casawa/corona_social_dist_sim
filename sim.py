@@ -13,14 +13,21 @@ class Simulation(object):
         self._i_to_i = 1 - self._i_to_r - self._i_to_d
 
         self._suspectible = set(range(population_size))
-        self._infected = set()
-        Simulation._random_split_set(self._suspectible, self._infected, k=initial_outbreak_size)
+        self._infected = dict()  # ID -> Days infected
+        self._suspectible_to_infected(k=initial_outbreak_size)
 
         self._recovered = set()
         self._deaths = set()
 
+    def _suspectible_to_infected(self, k):
+        """Randomly moves k people from suspectible to infected"""
+        rand_elems = random.sample(self._suspectible, k)
+        for elem in rand_elems:
+            self._infected[elem] = 0
+            self._suspectible.remove(elem)
+
     @staticmethod
-    def _random_split_set(source_set, dest_set, k):
+    def _rand_split_set(source_set, dest_set, k):
         """Randomly moves k elements from the source_set to dest_set"""
         rand_elems = random.sample(source_set, k)
         for elem in rand_elems:
