@@ -64,7 +64,7 @@ class Simulation(object):
     def _suspectible_to_unknown(self, distance_likelihood):
         # TODO I don't believe r0 is the right number here, but temporarily
         # Really should use beta for up to gamma days
-        num_will_get_infected = self._r0 * self.num_unknown_infected * ((1 - distance_likelihood) * self.num_suspectible) / self._population_size
+        num_will_get_infected = int(self._r0 * self.num_unknown_infected * ((1 - distance_likelihood) * self.num_suspectible) / self._population_size)
         self._move_rand_s_to_u(k=num_will_get_infected)
 
     def _unknown_to_known_infected(self):
