@@ -8,6 +8,18 @@ class Simulation(object):
         self._num_recovered = 0
         self._num_deaths = 0
 
+    @property
+    def num_infected(self):
+        return self._num_infected
+
+    @property
+    def num_recovered(self):
+        return self._num_recovered
+
+    @property
+    def num_deaths(self):
+        return self._num_deaths
+
     def step_day(self, distance_likelihood):
         # ASSUMPTION: recovered don't get it again
         pass
