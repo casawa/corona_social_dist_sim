@@ -33,7 +33,7 @@ def main():
 
     sim = Simulation(population_size, r0)
 
-    # Run repl simulation
+    # Run simulation over days
     for i in range(num_days):
         print("Day {}".format(i))
 
