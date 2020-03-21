@@ -40,6 +40,9 @@ def main():
         # TODO prompt for distance_likelihood
         distance_likelihood = 0
         sim.step_day(distance_likelihood)
+        print("Number of infected: {}".format(sim.num_infected))
+        print("Number of recovered: {}".format(sim.num_recovered))
+        print("Number of deaths: {}".format(sim.num_deaths))
 
 if __name__ == '__main__':
     main()
