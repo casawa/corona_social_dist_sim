@@ -60,6 +60,26 @@ class Simulation(object):
     def num_deaths(self):
         return len(self._deaths)
 
+    def _unknown_to_known_infected(self):
+        # TODO
+        pass
+
+    def _unknown_to_recovered(self):
+        # TODO
+        pass
+
+    def _known_to_recovered(self):
+        # TODO
+        pass
+
+    def _known_to_death(self):
+        # TODO
+        pass
+
+    def _update_day_counts(self):
+        # TODO
+        pass
+
     def step_day(self, distance_likelihood):
         # TODO I don't believe r0 is the right number here, but temporarily
         # Really should use beta for up to gamma days
@@ -67,7 +87,15 @@ class Simulation(object):
         num_will_get_infected = self._r0 * self.num_unknown_infected * ((1 - distance_likelihood) * self.num_suspectible) / self._population_size
         self._suspectible_to_infected(k=num_will_get_infected)
 
+        self._unknown_to_known_infected()
+        self._unknown_to_recovered()
+        # ASSUMPTION only known cases are severe enough to lead to death
+        self._known_to_death()
+        self._known_to_recovered()
+
         # ASSUMPTION: recovered don't get it again
+
+        self._update_day_counts()
 
 def main():
     # Parse arguments
