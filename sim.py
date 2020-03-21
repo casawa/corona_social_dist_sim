@@ -112,7 +112,6 @@ class Simulation(object):
         self._update_day_counts()
 
 def main():
-    # Parse arguments
     # TODO replace with args parsed
     population_size = 10 * 1000
     r0 = 2
@@ -125,8 +124,8 @@ def main():
     for i in range(num_days):
         print("Day {}".format(i))
 
-        # TODO prompt for distance_likelihood
-        distance_likelihood = 0
+        # TODO prompt the user for distance_likelihood btwn 0 - 1
+        distance_likelihood = 0.
         sim.step_day(distance_likelihood)
         print("Number of infected: {}".format(sim.num_infected))
         print("Number of recovered: {}".format(sim.num_recovered))
