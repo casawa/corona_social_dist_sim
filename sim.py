@@ -9,22 +9,22 @@ class Simulation(object):
         self._i_to_d = 0.003  # Idea being 1 - (1 - 0.003)^7 is approx 0.02
         self._i_to_i = 1 - self._i_to_r - self._i_to_d
 
-        self._num_suspectible = population_size
-        self._num_infected = 0
-        self._num_recovered = 0
-        self._num_deaths = 0
+        self._suspectible = set(range(population_size))
+        self._infected = set()
+        self._recovered = set()
+        self._deaths = set()
 
     @property
     def num_infected(self):
-        return self._num_infected
+        return len(self._infected)
 
     @property
     def num_recovered(self):
-        return self._num_recovered
+        return len(self._recovered)
 
     @property
     def num_deaths(self):
-        return self._num_deaths
+        return len(self._deaths)
 
     def step_day(self, distance_likelihood):
         # ASSUMPTION: recovered don't get it again
