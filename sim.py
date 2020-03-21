@@ -14,17 +14,18 @@ class Simulation(object):
         self._i_to_i = 1 - self._i_to_r - self._i_to_d
 
         self._suspectible = set(range(population_size))
-        self._infected = dict()  # ID -> Days infected
+        self._unknown_infected = dict()  # ID -> Days infected
+        self._known_infected = dict()    # ID -> Days infected
         self._suspectible_to_infected(k=initial_outbreak_size)
 
         self._recovered = set()
         self._deaths = set()
 
     def _suspectible_to_infected(self, k):
-        """Randomly moves k people from suspectible to infected"""
+        """Randomly moves k people from suspectible to unknown infected"""
         rand_elems = random.sample(self._suspectible, k)
         for elem in rand_elems:
-            self._infected[elem] = 0
+            self._unknown_infected[elem] = 0
             self._suspectible.remove(elem)
 
     @staticmethod
@@ -41,7 +42,7 @@ class Simulation(object):
 
     @property
     def num_infected(self):
-        return len(self._infected)
+        return len(self._unknown_infected) + len(self._known_infected)
 
     @property
     def num_recovered(self):
