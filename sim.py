@@ -4,6 +4,7 @@ import random
 
 class Simulation(object):
     def __init__(self, population_size, r0, initial_outbreak_size):
+        self._population_size = population_size
         self._r0 = r0
 
         # TODO better models? (e.g. consider time better)
@@ -35,6 +36,10 @@ class Simulation(object):
             source_set.remove(elem)
 
     @property
+    def num_suspectible(self):
+        return len(self._suspectible)
+
+    @property
     def num_infected(self):
         return len(self._infected)
 
@@ -47,8 +52,11 @@ class Simulation(object):
         return len(self._deaths)
 
     def step_day(self, distance_likelihood):
+        # TODO I don't believe r0 is the right number here, but temporarily
+        num_will_get_infected = self._r0 * self.num_infected * ((1 - distance_likelihood) * self.num_suspectible) / self._population_size
+        self._suspectible_to_infected(k=num_will_get_infected)
+
         # ASSUMPTION: recovered don't get it again
-        pass
 
 def main():
     # Parse arguments
