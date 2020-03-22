@@ -36,3 +36,4 @@ What are the long-term consequencies of this thinking as the virus spreads?
   - Better data visuals (graphs, etc)
   - Generally way better UI/UX of course
 - Simulation improvements
+  - Potentially add model explanation
