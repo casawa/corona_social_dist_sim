@@ -16,7 +16,7 @@ one will need to make in real life.
 Every day, with the information you have, you have a choice:
 - Should you leave your home and continue your regular routine, or stay at home?
 
-Everyone else also has this choice and information, and may think similar to what you’re thinking. In this simulation, they think the exact same way you do. So if you're leaning 30% to stay at home, so is everyone else.
+Everyone else also has this choice and information, and may think similar to what you're thinking -- and your choice likely influences theirs. In this simulation, they think the exact same way you do. So if you think there's a small risk and have a 10% chance of staying at home, everyone else is also thinking as such.
 
 What are the long-term consequencies of this thinking as the virus spreads?
 
