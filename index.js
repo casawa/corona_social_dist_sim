@@ -3,8 +3,9 @@ import Simulation from './sim.js'
 // Setup simulation
 const population_size = 10 * 1000
 const r0 = 2
-const num_days = 30
 const initial_outbreak_size = 3
+const conditionsElem = document.getElementById("initConditions")
+conditionsElem.innerHTML = `Population Size: ${population_size}, Initial Outbreak Size: ${initial_outbreak_size}`
 
 const sim = new Simulation(population_size, r0, initial_outbreak_size)
 let day = 0
