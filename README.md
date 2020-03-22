@@ -20,4 +20,5 @@ Everyone else also has this choice and may think similar to what you’re thinki
 **Note**: This is not a scientific simulation to be trusted for any reason! It is purely for illustrative purposes.
 
 ### Dev
-There's currently a CLI python prototype which can be run by `python3 ./prototyping/sim.py`
+- With node >= v13 simply run: `node ./main.mjs` to run the javascript simulation
+- Initially started with a  CLI python prototype which can be run by `python3 ./prototyping/sim.py`
