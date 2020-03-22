@@ -139,6 +139,8 @@ def main():
         distance_likelihood = 0.
         sim.step_day(distance_likelihood)
         print("Number of infected: {}".format(sim.num_infected))
+        print("- Number of known infected: {}".format(sim.num_known_infected))
+        print("- Number of unknown infected: {}".format(sim.num_unknown_infected))
         print("Number of recovered: {}".format(sim.num_recovered))
         print("Number of deaths: {}".format(sim.num_deaths))
 
