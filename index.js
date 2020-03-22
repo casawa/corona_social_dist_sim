@@ -16,7 +16,7 @@ function display_stats(display_unknown) {
         stats_text = stats_text.concat(`<p>-- Number known infected: ${sim.num_known_infected}</p>`)
         stats_text = stats_text.concat(`<p>-- Number unknown infected: ${sim.num_unknown_infected}</p>`)
     } else {
-        stats_text = stats_text.concat(`<p>Number known infected: ${sim.num_known_infected}</p>`)
+        stats_text = stats_text.concat(`<p>Number <i>known</i> infected: ${sim.num_known_infected}</p>`)
     }
     stats_text = stats_text.concat(`<p>Number recovered: ${sim.num_recovered}</p>`)
     stats_text = stats_text.concat(`<p>Number of deaths: ${sim.num_deaths}</p>`)
