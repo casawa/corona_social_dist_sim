@@ -20,4 +20,4 @@ Everyone else also has this choice and may think similar to what you’re thinki
 **Note**: This is not a scientific simulation to be trusted for any reason! It is purely for illustrative purposes.
 
 ### Dev
-Currently a python prototype that can be run by python3 ./sim.py
+There's currently a CLI python prototype which can be run by `python3 ./prototyping/sim.py`
