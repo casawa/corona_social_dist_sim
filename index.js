@@ -12,12 +12,16 @@ let day = 0
 
 const statsTextElem = document.getElementById("stats")
 
-function display_stats() {
-    // Admittedly just slightly jank, could instead append child nodes/etc
+function display_stats(display_unknown) {
+    // Admittedly slightly jank, could instead append child nodes/etc
     let stats_text = `<p>Day ${day}</p>`
-    stats_text = stats_text.concat(`<p>Number infected: ${sim.num_infected}</p>`)
-    stats_text = stats_text.concat(`<p>Number known infected: ${sim.num_known_infected}</p>`)
-    stats_text = stats_text.concat(`<p>Number unknown infected: ${sim.num_unknown_infected}</p>`)
+    if (display_unknown) {
+        stats_text = stats_text.concat(`<p>Number infected: ${sim.num_infected}</p>`)
+        stats_text = stats_text.concat(`<p>-- Number known infected: ${sim.num_known_infected}</p>`)
+        stats_text = stats_text.concat(`<p>-- Number unknown infected: ${sim.num_unknown_infected}</p>`)
+    } else {
+        stats_text = stats_text.concat(`<p>Number known infected: ${sim.num_known_infected}</p>`)
+    }
     stats_text = stats_text.concat(`<p>Number recovered: ${sim.num_recovered}</p>`)
     stats_text = stats_text.concat(`<p>Number of deaths: ${sim.num_deaths}</p>`)
     statsTextElem.innerHTML = stats_text
@@ -33,10 +37,10 @@ slider.oninput = function() {
 function run_step() {
     sim.step_day(slider.value / 100.);
     day += 1
-    display_stats()
+    display_stats(false)
 }
 
 const button = document.getElementById("runButton")
 button.onclick = run_step
 
-display_stats()
+display_stats(false)
