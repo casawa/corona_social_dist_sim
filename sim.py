@@ -124,6 +124,19 @@ class Simulation(object):
 
         self._update_day_counts()
 
+def prompt_social_distance_likelihood():
+    while True:
+        try:
+            user_response = input("How likely are you to social distance today? Enter between 0 to 1: ")
+            if user_response.lower().startswith('q'):
+                return None
+
+            distance_likelihood = float(user_response)
+            if 0 <= distance_likelihood <= 1:
+                return distance_likelihood
+        except:
+            pass
+
 def main():
     # TODO replace with args parsed
     population_size = 10 * 1000
@@ -137,8 +150,10 @@ def main():
     for i in range(num_days):
         print("Day {}".format(i))
 
-        # TODO prompt the user for distance_likelihood btwn 0 - 1
         distance_likelihood = 0.
+        # distance_likelihood = prompt_social_distance_likelihood()
+        # if distance_likelihood is None:
+        #     return
         sim.step_day(distance_likelihood)
         print("Number of infected: {}".format(sim.num_infected))
         print("- Number of known infected: {}".format(sim.num_known_infected))
