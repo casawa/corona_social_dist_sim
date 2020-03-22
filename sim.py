@@ -2,13 +2,16 @@
 
 import random
 
+# TODO: Main flaws
+# Considering state
+# Considering time?
+# Stochastity?
 class Simulation(object):
     """See step_day() for the model."""
     def __init__(self, population_size, r0, initial_outbreak_size):
         self._population_size = population_size
         self._r0 = r0
 
-        # TODO better models? (e.g. consider time better)
         # TODO consider exposing these params in the API?
         self._i_to_r = 0.25   # Idea being 1 - (1 - 0.25)^14 is approx 0.98
         self._i_to_d = 0.003  # Idea being 1 - (1 - 0.003)^7 is approx 0.02
