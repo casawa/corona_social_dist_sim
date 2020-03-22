@@ -7,6 +7,7 @@ def rand_sample(to_sample_from, k):
 
 # TODO: Main flaws
 # Considering state
+# Parameter values
 # Considering time?
 # Stochastity?
 class Simulation(object):
@@ -193,7 +194,7 @@ def main():
     for i in range(num_days):
         print("Day {}".format(i + 1))
 
-        distance_likelihood = 0.2
+        distance_likelihood = 1
         # distance_likelihood = prompt_social_distance_likelihood()
         # if distance_likelihood is None:
         #     return
