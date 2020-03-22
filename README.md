@@ -26,3 +26,10 @@ Everyone else also has this choice and may think similar to what you’re thinki
 #### CLI
 - With node >= v13 simply run: `node ./main.js` to run the javascript simulation
 - Initially started with a  CLI python prototype which can be run by `python3 ./prototyping/sim.py`
+
+### TODO
+- Web client improvements 
+  - Intro explanation
+  - Better data visuals (graphs, etc)
+  - Generally better UI/UX
+- Simulation improvements
