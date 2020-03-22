@@ -160,11 +160,11 @@ class Simulation(object):
 def prompt_social_distance_likelihood():
     while True:
         try:
-            user_response = input("How likely are you to social distance today? Enter between 0 to 1: ")
+            user_response = input("How likely are you to leave your home today? Enter between 0 to 1: ")
             if user_response.lower().startswith('q'):
                 return None
 
-            distance_likelihood = float(user_response)
+            distance_likelihood = 1 - float(user_response)
             if 0 <= distance_likelihood <= 1:
                 return distance_likelihood
         except:
