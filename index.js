@@ -10,7 +10,7 @@ let day = 0
 
 function display_stats(display_unknown) {
     // Admittedly slightly jank, could instead append child nodes/etc
-    let stats_text = `<p>Day ${day}</p>`
+    let stats_text = `<p><b>Day ${day}</b></p>`
     if (display_unknown) {
         stats_text = stats_text.concat(`<p>Number infected: ${sim.num_infected}</p>`)
         stats_text = stats_text.concat(`<p>-- Number known infected: ${sim.num_known_infected}</p>`)
