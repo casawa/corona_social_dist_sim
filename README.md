@@ -20,5 +20,9 @@ Everyone else also has this choice and may think similar to what you’re thinki
 **Note**: This is not a scientific simulation to be trusted for any reason! It is purely for illustrative purposes.
 
 ### Dev
-- With node >= v13 simply run: `node ./main.mjs` to run the javascript simulation
+#### Web App
+- Start up a web server with `python3 -m http.server`
+- Open up `http://localhost:8000` in your browser
+#### CLI
+- With node >= v13 simply run: `node ./main.js` to run the javascript simulation
 - Initially started with a  CLI python prototype which can be run by `python3 ./prototyping/sim.py`
