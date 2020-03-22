@@ -2,6 +2,9 @@
 
 import random
 
+def rand_sample(to_sample_from, k):
+    return random.sample(to_sample_from, min(k, len(to_sample_from)))
+
 # TODO: Main flaws
 # Considering state
 # Considering time?
@@ -23,7 +26,7 @@ class Simulation(object):
         self._i_to_i = 1 - self._i_to_r - self._i_to_d
 
         self._u_to_k = 0.5    # No idea if this is right
-        self._incubation_period = 1   # TODO probably not the correct use of incubation period
+        self._incubation_period = 3   # TODO probably not the correct use of incubation period
 
         self._suspectible = set(range(population_size))
         self._unknown_infected = dict()  # ID -> Days infected
@@ -36,7 +39,7 @@ class Simulation(object):
     @staticmethod
     def _rand_split_set(source_set, dest_set, k):
         """Randomly moves k elements from the source_set to dest_set"""
-        rand_elems = random.sample(source_set, k)
+        rand_elems = rand_sample(source_set, k)
         for elem in rand_elems:
             dest_set.add(elem)
             source_set.remove(elem)
@@ -67,7 +70,7 @@ class Simulation(object):
 
     def _move_rand_s_to_u(self, k):
         """Randomly moves k people from suspectible to unknown infected"""
-        rand_elems = random.sample(self._suspectible, k)
+        rand_elems = rand_sample(self._suspectible, k)
         for elem in rand_elems:
             self._unknown_infected[elem] = 0
             self._suspectible.remove(elem)
@@ -90,7 +93,7 @@ class Simulation(object):
         # TODO make sure state safe, consider stochasticity
         incubated_unknowns = self._get_incubated_unknowns()
         num_to_known = int(self._u_to_k * len(incubated_unknowns))
-        rand_persons = random.sample(incubated_unknowns, num_to_known)
+        rand_persons = rand_sample(incubated_unknowns, num_to_known)
         for person in rand_persons:
             self._known_infected[person] = self._unknown_infected[person]
             del self._unknown_infected[person]
@@ -99,7 +102,7 @@ class Simulation(object):
         # TODO make sure state safe, consider stochasticity
         incubated_unknowns = self._get_incubated_unknowns()
         num_to_recovered = int(self._i_to_r * len(incubated_unknowns))
-        rand_persons = random.sample(incubated_unknowns, num_to_recovered)
+        rand_persons = rand_sample(incubated_unknowns, num_to_recovered)
         for person in rand_persons:
             del self._unknown_infected[person]
             self._recovered.add(person)
@@ -108,7 +111,7 @@ class Simulation(object):
         # TODO make sure state-safe. Could probably share code with _known_to_death
         # TODO could depend on how long they've had it too
         num_to_recover = int(self.num_known_infected * self._i_to_r)
-        rand_persons = random.sample(self._known_infected.keys(), num_to_recover)
+        rand_persons = rand_sample(self._known_infected.keys(), num_to_recover)
         for person in rand_persons:
             del self._known_infected[person]
             self._recovered.add(person)
@@ -117,7 +120,7 @@ class Simulation(object):
         # TODO make sure state-safe. Could probably share code with _known_to_recovered
         # TODO could depend on how long they've had it too
         num_to_die = int(self.num_known_infected * self._i_to_d)
-        rand_persons = random.sample(self._known_infected.keys(), num_to_die)
+        rand_persons = rand_sample(self._known_infected.keys(), num_to_die)
         for person in rand_persons:
             del self._known_infected[person]
             self._deaths.add(person)
