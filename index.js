@@ -7,7 +7,7 @@ const initial_outbreak_size = 3
 const conditionsElem = document.getElementById("initConditions")
 conditionsElem.innerHTML = `Population Size: ${population_size}, Initial Outbreak Size: ${initial_outbreak_size}`
 
-const sim = new Simulation(population_size, r0, initial_outbreak_size)
+let sim = new Simulation(population_size, r0, initial_outbreak_size)
 let day = 0
 
 const statsTextElem = document.getElementById("stats")
@@ -40,7 +40,16 @@ function run_step() {
     display_stats(false)
 }
 
-const button = document.getElementById("runButton")
-button.onclick = run_step
+const runButton = document.getElementById("runButton")
+runButton.onclick = run_step
+
+function reset() {
+    day = 0
+    sim = new Simulation(population_size, r0, initial_outbreak_size)
+    display_stats(false)
+}
+
+const resetButton = document.getElementById("resetButton")
+resetButton.onclick = reset
 
 display_stats(false)
