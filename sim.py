@@ -166,6 +166,14 @@ def prompt_social_distance_likelihood():
         except:
             pass
 
+def print_stats(sim):
+    print("Number of infected: {}".format(sim.num_infected))
+    print("- Number of known infected: {}".format(sim.num_known_infected))
+    print("- Number of unknown infected: {}".format(sim.num_unknown_infected))
+    print("Number of recovered: {}".format(sim.num_recovered))
+    print("Number of deaths: {}".format(sim.num_deaths))
+    print()
+
 def main():
     # TODO replace with args parsed
     population_size = 10 * 1000
@@ -175,20 +183,19 @@ def main():
 
     sim = Simulation(population_size, r0, initial_outbreak_size)
 
+    print("Day 0")
+    print_stats(sim)
+
     # Run simulation over days
     for i in range(num_days):
-        print("Day {}".format(i))
+        print("Day {}".format(i + 1))
 
         distance_likelihood = 0.2
         # distance_likelihood = prompt_social_distance_likelihood()
         # if distance_likelihood is None:
         #     return
         sim.step_day(distance_likelihood)
-        print("Number of infected: {}".format(sim.num_infected))
-        print("- Number of known infected: {}".format(sim.num_known_infected))
-        print("- Number of unknown infected: {}".format(sim.num_unknown_infected))
-        print("Number of recovered: {}".format(sim.num_recovered))
-        print("Number of deaths: {}".format(sim.num_deaths))
+        print_stats(sim)
 
 if __name__ == '__main__':
     main()
