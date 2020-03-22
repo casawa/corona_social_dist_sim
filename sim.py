@@ -13,11 +13,17 @@ class Simulation(object):
         self._r0 = r0
 
         # TODO consider exposing these params in the API?
-        self._i_to_r = 0.25   # Idea being 1 - (1 - 0.25)^14 is approx 0.98
-        self._i_to_d = 0.003  # Idea being 1 - (1 - 0.003)^7 is approx 0.02
+        # In a version that considers time better...
+        # self._i_to_r = 0.25   # Idea being 1 - (1 - 0.25)^14 is approx 0.98
+        # self._i_to_d = 0.003  # Idea being 1 - (1 - 0.003)^7 is approx 0.02
+
+        # On a given day, how often do these transitions happen?
+        self._i_to_r = 0.30
+        self._i_to_d = 0.02
+        self._i_to_i = 1 - self._i_to_r - self._i_to_d
+
         self._u_to_k = 0.5    # No idea if this is right
         self._incubation_period = 1   # TODO probably not the correct use of incubation period
-        self._i_to_i = 1 - self._i_to_r - self._i_to_d
 
         self._suspectible = set(range(population_size))
         self._unknown_infected = dict()  # ID -> Days infected
@@ -164,7 +170,7 @@ def main():
     # TODO replace with args parsed
     population_size = 10 * 1000
     r0 = 2
-    num_days = 3
+    num_days = 30
     initial_outbreak_size = 3
 
     sim = Simulation(population_size, r0, initial_outbreak_size)
@@ -173,7 +179,7 @@ def main():
     for i in range(num_days):
         print("Day {}".format(i))
 
-        distance_likelihood = 0.
+        distance_likelihood = 0.2
         # distance_likelihood = prompt_social_distance_likelihood()
         # if distance_likelihood is None:
         #     return
