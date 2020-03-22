@@ -4,7 +4,7 @@
 // Considering state (i.e. order should not matter between operations)
 // Parameter values
 // Considering time duration?
-// Stochastity?
+// Stochastity??
 export default class Simulation {
     // See step_day() for the model.
     constructor(population_size, r0, initial_outbreak_size) {
@@ -89,7 +89,6 @@ export default class Simulation {
     }
 
     _unknown_to_known_infected() {
-        // TODO consider stochasticity
         const incubated_unknowns = this._get_incubated_unknowns()
         const num_to_known = Math.floor(this._u_to_k * incubated_unknowns.length)
 
@@ -100,7 +99,6 @@ export default class Simulation {
     }
 
     _unknown_to_recovered() {
-        // TODO consider stochasticity
         const incubated_unknowns = this._get_incubated_unknowns()
         const num_to_recovered = Math.floor(this._i_to_r * incubated_unknowns.length)
 
@@ -113,7 +111,6 @@ export default class Simulation {
     _known_to_recovered() {
         // TODO make sure state-safe. Could probably share code with _known_to_death
         // TODO could depend on how long they've had it too.
-        // TODO consider stochastic
         const num_to_recover = Math.floor(this.num_known_infected * this._i_to_r)
 
         for (let p of Object.keys(this._known_infected).slice(0, num_to_recover)) {
@@ -125,7 +122,6 @@ export default class Simulation {
     _known_to_death() {
         // TODO make sure state-safe. Could probably share code with _known_to_recovered
         // TODO could depend on how long they've had it too
-        // TODO consider stochastic
         const num_to_die = Math.floor(this.num_known_infected * this._i_to_d)
 
         for (let p of Object.keys(this._known_infected).slice(0, num_to_die)) {
