@@ -2,9 +2,9 @@
   "name": "corona_social_dist_sim",
   "version": "0.1.0",
   "description": "COVID-19 simulator",
-  "main": "main.js",
+  "main": "runner.js",
   "scripts": {
-    "run": "node main.js"
+    "run": "node runner.js"
   },
   "repository": {
     "type": "git",
