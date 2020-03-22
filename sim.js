@@ -74,7 +74,8 @@ export default class Simulation {
     _suspectible_to_unknown(distance_likelihood) {
         // TODO I don't believe r0 is the right number here, but temporarily
         // Really should use beta for up to gamma days
-        const num_will_get_infected = Math.floor(this._r0 * this.num_unknown_infected * ((1 - distance_likelihood) * this.num_suspectible) / this._population_size)
+        // TODO floor vs ceil here?
+        const num_will_get_infected = Math.ceil(this._r0 * this.num_unknown_infected * ((1 - distance_likelihood) * this.num_suspectible) / this._population_size)
         this._move_s_to_u(num_will_get_infected)
     }
 
