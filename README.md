@@ -13,9 +13,12 @@ if an interactive way is useful in grappling the decisions
 one will need to make in real life.
 
 ### The External Pitch
-Every day, with the information you have, you have a choice: Should you leave your home and continue your regular routine, or not?
+Every day, with the information you have, you have a choice:
+- Should you leave your home and continue your regular routine, or stay at home?
 
-Everyone else also has this choice and may think similar to what you’re thinking — in this simulation, they think the exact same way you do. If so, what are the long-term consequencies of this thinking as the virus spreads?
+Everyone else also has this choice and information, and may think similar to what you’re thinking. In this simulation, they think the exact same way you do. So if you're leaning 30% to stay at home, so is everyone else.
+
+What are the long-term consequencies of this thinking as the virus spreads?
 
 **Note**: This is not a scientific simulation and the numbers should not be trusted for any reason! It is purely for illustrative purposes.
 
@@ -29,7 +32,7 @@ Everyone else also has this choice and may think similar to what you’re thinki
 
 ### TODO
 - Web client improvements 
-  - Intro explanation
+  - Improve intro explanation
   - Better data visuals (graphs, etc)
-  - Generally better UI/UX
+  - Generally way better UI/UX of course
 - Simulation improvements
