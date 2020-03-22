@@ -10,8 +10,10 @@ class Simulation(object):
 
         # TODO better models? (e.g. consider time better)
         # TODO consider exposing these params in the API?
-        self._i_to_r = 0.25  # Idea being 1 - (1 - 0.25)^14 is approx 0.98
+        self._i_to_r = 0.25   # Idea being 1 - (1 - 0.25)^14 is approx 0.98
         self._i_to_d = 0.003  # Idea being 1 - (1 - 0.003)^7 is approx 0.02
+        self._u_to_k = 0.5    # No idea if this is right
+        self._incubation_period = 1   # TODO probably not the correct use of incubation period
         self._i_to_i = 1 - self._i_to_r - self._i_to_d
 
         self._suspectible = set(range(population_size))
@@ -67,13 +69,31 @@ class Simulation(object):
         num_will_get_infected = int(self._r0 * self.num_unknown_infected * ((1 - distance_likelihood) * self.num_suspectible) / self._population_size)
         self._move_rand_s_to_u(k=num_will_get_infected)
 
+    def _get_incubated_unknowns(self):
+        incubated_unknowns = set()
+        for u in self._unknown_infected:
+            if self._unknown_infected[u] >= self._incubation_period:
+                incubated_unknowns.add(u)
+
+        return incubated_unknowns
+
     def _unknown_to_known_infected(self):
-        # TODO
-        pass
+        # TODO make sure state safe, consider stochasticity
+        incubated_unknowns = self._get_incubated_unknowns()
+        num_to_known = int(self._u_to_k * len(incubated_unknowns))
+        rand_persons = random.sample(incubated_unknowns, num_to_known)
+        for person in rand_persons:
+            self._known_infected[person] = self._unknown_infected[person]
+            del self._unknown_infected[person]
 
     def _unknown_to_recovered(self):
-        # TODO
-        pass
+        # TODO make sure state safe, consider stochasticity
+        incubated_unknowns = self._get_incubated_unknowns()
+        num_to_recovered = int(self._i_to_r * len(incubated_unknowns))
+        rand_persons = random.sample(incubated_unknowns, num_to_recovered)
+        for person in rand_persons:
+            del self._unknown_infected[person]
+            self._recovered.add(person)
 
     def _known_to_recovered(self):
         # TODO make sure state-safe. Could probably share code with _known_to_death
@@ -81,8 +101,8 @@ class Simulation(object):
         num_to_recover = int(self.num_known_infected * self._i_to_r)
         rand_persons = random.sample(self._known_infected.keys(), num_to_recover)
         for person in rand_persons:
-            del self._known_infected[elem]
-            self._recovered.add(elem)
+            del self._known_infected[person]
+            self._recovered.add(person)
 
     def _known_to_death(self):
         # TODO make sure state-safe. Could probably share code with _known_to_recovered
@@ -90,8 +110,8 @@ class Simulation(object):
         num_to_die = int(self.num_known_infected * self._i_to_d)
         rand_persons = random.sample(self._known_infected.keys(), num_to_die)
         for person in rand_persons:
-            del self._known_infected[elem]
-            self._deaths.add(elem)
+            del self._known_infected[person]
+            self._deaths.add(person)
 
     def _update_day_counts(self):
         for person in self._known_infected:
