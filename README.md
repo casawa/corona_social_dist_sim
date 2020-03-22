@@ -13,8 +13,8 @@ if an interactive way is useful in grappling the decisions
 one will need to make in real life.
 
 ### The External Pitch
-Every day, with the information you have, you have a choice:
-- Should you leave your home and continue your regular routine, or stay at home?
+Each day, with the information you have, you have a choice:
+- Should you leave home and do your regular routine, or stay at home?
 
 Everyone else also has this choice and information, and may think similar to what you're thinking -- and your choice likely influences theirs. In this simulation, they think the exact same way you do. So if you think there's a small risk and have a 10% chance of staying at home, everyone else is also thinking as such.
 
