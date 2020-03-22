@@ -84,8 +84,11 @@ class Simulation(object):
         pass
 
     def _update_day_counts(self):
-        # TODO
-        pass
+        for person in self._known_infected:
+            self._known_infected[person] += 1
+
+        for person in self._unknown_infected:
+            self._unknown_infected[person] += 1
 
     def step_day(self, distance_likelihood):
         """Simulates one day.
