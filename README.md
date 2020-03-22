@@ -1,23 +1,23 @@
-# Virus Social Distancing Simulator
+# COVID-19 Social Distancing Simulator
 
 ### Purpose
 Social distancing is very important to containing COVID-19.
-But admittedly at first the risk might not seem that high.
+However, admittedly at first, the risk for an individual might not seem that high.
 
-This simulation aims for people to make decisions of social
-distancing or not and seeing the consequences of their
-actions to better understand risk.
+This simulation aims for people to -- just like real life -- 
+make a decision each day of social distancing or not and seeing 
+the consequences of their actions to better understand the risk.
 
-Doing this since I didn't see such a simulation and wondering
-if an interactive way that really helps grapple the decisions
-they'll need to make in real life anyway is useful.
+Doing this since I didn't see such a simulation, and wondering
+if an interactive way is useful in grappling the decisions
+one will need to make in real life.
 
 ### The External Pitch
-Every day, with the information you have, you have a choice: Should you leave your home and continue your regular routine or not?
+Every day, with the information you have, you have a choice: Should you leave your home and continue your regular routine, or not?
 
-Everyone else also has this choice and may think similar to what you’re thinking — in this simulation, they think the exact same way you do.
+Everyone else also has this choice and may think similar to what you’re thinking — in this simulation, they think the exact same way you do. If so, what are the long-term consequencies of this thinking as the virus spreads?
 
-**Note**: This is not a scientific simulation to be trusted for any reason! It is purely for illustrative purposes.
+**Note**: This is not a scientific simulation and the numbers should not be trusted for any reason! It is purely for illustrative purposes.
 
 ### Dev
 #### Web App
