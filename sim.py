@@ -76,12 +76,20 @@ class Simulation(object):
         pass
 
     def _known_to_recovered(self):
-        # TODO
-        pass
+        # TODO make sure state-safe. Could probably share code with _known_to_death
+        num_to_recover = int(self.num_known_infected * self._i_to_r)
+        rand_persons = random.sample(self._known_infected.keys(), num_to_recover)
+        for person in rand_persons:
+            del self._known_infected[elem]
+            self._recovered.add(elem)
 
     def _known_to_death(self):
-        # TODO
-        pass
+        # TODO make sure state-safe. Could probably share code with _known_to_recovered
+        num_to_die = int(self.num_known_infected * self._i_to_d)
+        rand_persons = random.sample(self._known_infected.keys(), num_to_die)
+        for person in rand_persons:
+            del self._known_infected[elem]
+            self._deaths.add(elem)
 
     def _update_day_counts(self):
         for person in self._known_infected:
