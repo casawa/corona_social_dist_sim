@@ -1,4 +1,4 @@
-import Simulation from './sim.mjs'
+import Simulation from './sim.js'
 
 function print_stats(sim, reveal_unknown) {
     if (reveal_unknown) {
