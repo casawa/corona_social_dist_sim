@@ -91,7 +91,7 @@ class Simulation(object):
         return incubated_unknowns
 
     def _unknown_to_known_infected(self):
-        # TODO make sure state safe, consider stochasticity
+        # TODO consider stochasticity
         incubated_unknowns = self._get_incubated_unknowns()
         num_to_known = int(self._u_to_k * len(incubated_unknowns))
         rand_persons = rand_sample(incubated_unknowns, num_to_known)
@@ -100,7 +100,7 @@ class Simulation(object):
             del self._unknown_infected[person]
 
     def _unknown_to_recovered(self):
-        # TODO make sure state safe, consider stochasticity
+        # TODO consider stochasticity
         incubated_unknowns = self._get_incubated_unknowns()
         num_to_recovered = int(self._i_to_r * len(incubated_unknowns))
         rand_persons = rand_sample(incubated_unknowns, num_to_recovered)
@@ -170,10 +170,13 @@ def prompt_social_distance_likelihood():
         except:
             pass
 
-def print_stats(sim):
-    print("Number of infected: {}".format(sim.num_infected))
-    print("- Number of known infected: {}".format(sim.num_known_infected))
-    print("- Number of unknown infected: {}".format(sim.num_unknown_infected))
+def print_stats(sim, reveal_unknown=False):
+    if reveal_unknown:
+        print("Number of infected: {}".format(sim.num_infected))
+        print("- Number of known infected: {}".format(sim.num_known_infected))
+        print("- Number of unknown infected: {}".format(sim.num_unknown_infected))
+    else:
+        print("Number of known infected: {}".format(sim.num_known_infected))
     print("Number of recovered: {}".format(sim.num_recovered))
     print("Number of deaths: {}".format(sim.num_deaths))
     print()
@@ -194,10 +197,9 @@ def main():
     for i in range(num_days):
         print("Day {}".format(i + 1))
 
-        distance_likelihood = 1
-        # distance_likelihood = prompt_social_distance_likelihood()
-        # if distance_likelihood is None:
-        #     return
+        distance_likelihood = prompt_social_distance_likelihood()
+        if distance_likelihood is None:
+            return
         sim.step_day(distance_likelihood)
         print_stats(sim)
 
