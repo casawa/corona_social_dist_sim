@@ -3,10 +3,10 @@
   <head>
     <title>Corona Simulator</title>
     <script type="module" src="index.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-    <div class="jumbotron">
+    <div style="margin: 20px;">
       <h2>COVID-19 Social Distancing Sim</h2>
       <p> Each day, with the information you have, you have a choice:<br />
         - Should you leave home and do your regular routine, or stay at home?
@@ -17,7 +17,7 @@
         <br /><br />
         <b>Note</b>: This is not a scientific simulation to be trusted for any reason! It is purely for illustrative purposes.
       </p>
-      <hr/>
+      <hr />
       <p id="initConditions"></p>
       <hr />
       <p id="stats"></p>
@@ -26,7 +26,7 @@
         <input type="range" min="0" max="100" value="0" class="slider" id="distLikelihoodSlider">
         <span id="sliderVal"></span>%
       </div>
-      <br/>
+      <br />
       <button type="button" class="btn btn-primary" id="runButton"> Next Day </button>
       <button type="button" class="btn btn-light" id="resetButton"> Reset </button>
     </div>
